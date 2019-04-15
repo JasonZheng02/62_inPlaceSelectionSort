@@ -17,23 +17,37 @@ public class OrderedList_inArraySlots
      */
     public OrderedList_inArraySlots
             ( ArrayList<Integer> unordered) {
-        this();  // violates the directions for this hw
         
-        System.out.println( 
-            "Change this to report on progress."
-          + System.lineSeparator()
-          + "You were going to do that even without prompting, right?"
-          );
+        int nextLargerAt;
+        Integer temp;
+        
+        for (int index = 0; index < unordered.size(); index++) {
+            nextLargerAt = champIndex(index, unordered);
+            temp = unordered.get(index);
+            unordered.set(index,unordered.get(nextLargerAt));
+            unordered.set(nextLargerAt,temp);
+            //System.out.println(unordered);
+        }
+        
+        list_iAS = unordered;
     }
 
 
     /** 
       helper function for constructor
       Write good English here, reflecting good thinking.
-      @return ??
+      @return index of smallest Integer
      */
-     private int champIndex() {
-        return 0;  // replace this line
+     private int champIndex(int start, ArrayList<Integer> unordered) {
+        Integer champ = Integer.MAX_VALUE;
+        int index = -1;
+        for (int i = start; i < unordered.size(); i++) {
+            if (champ > unordered.get(i)) {
+                champ = unordered.get(i);
+                index = i;
+            }
+        }
+        return index;
      }
 
 
